@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BingeX - Find Your Next Favorite Flick!</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            color: black;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: black;
+            color: white;
+        }
+
+        header .logo h1 {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        header .logo .gold {
+            color: gold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, black, gold);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        #hero h2 {
+            font-size: 3rem;
+        }
+
+        #hero .gold {
+            color: gold;
+        }
+
+        #hero input {
+            padding: 0.8rem;
+            font-size: 1rem;
+            width: 50%;
+            margin-top: 1rem;
+            border: 2px solid gold;
+            border-radius: 8px;
+        }
+
+        /* Results Section */
+        #results {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .movie-card {
+            border: 2px solid gold;
+            border-radius: 10px;
+            overflow: hidden;
+            display: inline-block;
+            width: 200px;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .movie-card h3 {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: black;
+        }
+
+        .movie-card p {
+            font-size: 0.9rem;
+            color: gray;
+        }
+
+        /* Footer */
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8rem;
+        }
+
+     /* Moods Section */
+#moods {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, white, gold);
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+    color: black;
+}
+
+#moods h2 {
+    font-size: 2rem;
+    color: black;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.mood-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.mood {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: black;
+    font-size: 2.5rem;
+    width: 120px;
+    height: 120px;
+    border: 2px solid gold;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mood span {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.mood:hover {
+    transform: scale(1.2);
+    background-color: gold;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: black;
+}
+
+#moods #movie-results {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.movie-card {
+    width: 150px;
+    border: 2px solid gold;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background-color: rgb(8, 8, 8);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid gold;
+}
+
+.movie-card h3 {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: rgb(248, 245, 245);
+}
+
+.movie-card p {
+    font-size: 0.9rem;
+    color: gray;
+}
+
+.movie-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgb(12, 12, 12);
+}
+#nlp-mood {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, white, gold);
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+    color: black;
+}
+
+#nlp-mood .section-title {
+    font-size: 2rem;
+    color: black;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#nlp-mood .mood-input {
+    margin: 1rem 0;
+}
+
+#nlp-mood input {
+    padding: 1rem;
+    font-size: 1rem;
+    width: 60%;
+    border: 2px solid gold;
+    border-radius: 8px;
+}
+
+#nlp-mood button {
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: black;
+    color: white;
+    border: 2px solid gold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#nlp-mood button:hover {
+    background-color: gold;
+    color: black;
+}
+
+#nlp-movie-results {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#search-button {
+    background-color: black;
+    color: white;
+    border: 2px solid gold;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: lowercase;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+#search-button:hover {
+    background-color: gold;
+    color: black;
+    transform: scale(1.1); /* Adds a slight zoom effect on hover */
+}
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>Binge<span class="gold">X</span></h1>
+            <p>Your personalized movie guide 🎬</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#trending">Trending</a></li>
+                <li><a href="#moods">Moods</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-text">
+            <h2>Find Your Next <span class="gold">Favorite Flick!</span></h2>
+            <p>Let BingeX guide your binge-worthy journey 🍿</p>
+            <input type="text" id="search-bar" placeholder="Enter the name of the movie">
+            <button id="search-button">Search</button>
+        </div>
+        <div id = "movie-results"></div>
+    </section>
+
+    <section id="nlp-mood">
+        <h2 class="section-title">Find Movies Based on Your Mood</h2>
+        <p>Tell us how you're feeling, and we'll recommend the perfect movies for you!</p>
+        <div class="mood-input">
+            <input type="text" id="mood-input" placeholder="Type something like 'I want a chill vibe'">
+            <button id="submit-mood">Find Movies</button>
+        </div>
+        <div id="nlp-movie-results"></div>
+    </section>
+    
+
+
+    <section id="moods">
+        <h2 class="section-title">Choose Your Preference</h2>
+        <div class="mood-icons">
+            <div class="mood" data-genre="35" title="Comedy">
+                😂 <span>Comedy</span>
+            </div>
+            <div class="mood" data-genre="18" title="Drama">
+                🎭 <span>Drama</span>
+            </div>
+            <div class="mood" data-genre="28" title="Action">
+                💥 <span>Action</span>
+            </div>
+            <div class="mood" data-genre="10749" title="Romance">
+                ❤️ <span>Romance</span>
+            </div>
+        </div>
+        <div id="mood-results"></div>
+    </section>
+    
+
+    
+
+    <footer>
+        <p>Powered by TMDB | Happy Binging! 🍿</p>
+        <p>MADE BY Ngwako R</p>
+    </footer>
+
+    <script>
+       // Fetching the search button and input field
+const searchButton = document.getElementById('search-button');
+const searchBar = document.getElementById('search-bar');
+const movieResults = document.getElementById('movie-results');
+
+// Adding event listener for the search button
+searchButton.addEventListener('click', () => {
+    const query = searchBar.value.trim();
+
+    if (query) {
+        fetchMovies(query);
+    } else {
+        alert('Please enter a movie name.');
+    }
+});
+
+// Function to fetch movies based on the search query
+function fetchMovies(query) {
+    fetch(`/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => displayMovies(data.results))
+        .catch(error => {
+            console.error('Error fetching movies:', error);
+            alert('Something went wrong. Please try again.');
+        });
+}
+
+// Function to display the fetched movie results
+function displayMovies(movies) {
+    movieResults.innerHTML = '';  // Clear previous results
+
+    if (movies.length === 0) {
+        movieResults.innerHTML = `<p>No movies found. Try another search!</p>`;
+    } else {
+        movies.forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.classList.add('movie-card');
+            movieCard.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                <h3>${movie.title}</h3>
+                <p>${movie.release_date}</p>
+            `;
+            movieResults.appendChild(movieCard);
+        });
+    }
+}
+
+              
+
+        document.querySelectorAll('.mood').forEach(mood => {
+    mood.addEventListener('click', () => {
+        const genreId = mood.getAttribute('data-genre');
+
+        fetch(`/recommend-by-genre?genre_id=${genreId}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultsContainer = document.getElementById('mood-results');
+                resultsContainer.innerHTML = '';
+
+                if (data.results && data.results.length > 0) {
+                    data.results.forEach(movie => {
+                        const movieCard = `
+                            <div class="movie-card">
+                                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
+                                <h3>${movie.title}</h3>
+                                <p>⭐ ${movie.vote_average}</p>
+                            </div>
+                        `;
+                        resultsContainer.innerHTML += movieCard;
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<p>No movies found for this genre.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching movies:', error);
+                document.getElementById('movie-results').innerHTML = '<p>Error fetching movies.</p>';
+            });
+    });
+});
+
+document.getElementById('submit-mood').addEventListener('click', () => {
+    const moodInput = document.getElementById('mood-input').value.trim();
+
+    if (moodInput) {
+        // Send the mood input to the backend for analysis
+        fetch('/analyze-mood', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mood: moodInput })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultsContainer = document.getElementById('nlp-movie-results');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            if (data.results && data.results.length > 0) {
+                data.results.forEach(movie => {
+                    const movieCard = `
+                        <div class="movie-card">
+                            <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
+                            <h3>${movie.title}</h3>
+                            <p>⭐ ${movie.vote_average}</p>
+                        </div>
+                    `;
+                    resultsContainer.innerHTML += movieCard;
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>No movies found for this mood.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error analyzing mood:', error);
+            document.getElementById('nlp-movie-results').innerHTML = '<p>Error fetching movies. Please try again later.</p>';
+        });
+    } else {
+        alert('Please enter a mood description.');
+    }
+});
+
+
+    </script>
+</body>
+</html>

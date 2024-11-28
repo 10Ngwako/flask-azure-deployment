@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BingeX - AI-Powered Movie Recommendations</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #000;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h1, h2, h3 {
+      color: #d4af37;
+    }
+
+    p {
+      color: #555;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #d4af37;
+    }
+
+    nav a {
+      margin-left: 20px;
+      font-size: 16px;
+      color: #555;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    nav .btn {
+      background: #d4af37;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 600;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    nav .btn:hover {
+      background: #c1992e;
+      transform: scale(1.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background: url('https://source.unsplash.com/1600x900/?cinema') no-repeat center/cover;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background: #d4af37;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #c1992e;
+      transform: scale(1.1);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 20px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .features h2 {
+      margin-bottom: 30px;
+    }
+
+    .feature-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .feature-card {
+      width: 300px;
+      background: #fff;
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .feature-card img {
+      width: 50px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 50px 20px;
+      background: #fff;
+    }
+
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      border: 1px solid #d4af37;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      background: #f9f9f9;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .faq-item:hover {
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-item.open {
+      background: #fff;
+    }
+
+    .faq-answer {
+      display: none;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .explore-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: gold;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.explore-btn:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container navbar">
+      <div class="logo">BingeX</div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact" class="btn">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Discover Your Next Favorite Movie</h1>
+      <a href="{{ url_for('index_page') }}" class="explore-btn">Explore Now</a>
+
+
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <h2>Why Choose BingeX?</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/artificial-intelligence.png" alt="AI Icon">
+        <h3>AI-Powered</h3>
+        <p>Get personalized movie recommendations.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/tv-show.png" alt="Streaming Icon">
+        <h3>Streaming Info</h3>
+        <p>Know where your favorite movies are streaming.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/filter.png" alt="Filter Icon">
+        <h3>Smart Filters</h3>
+        <p>Find movies by genre, year, or mood easily.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>FAQs</h2>
+    <div class="faq-item">
+      <h3>How does BingeX work?</h3>
+      <div class="faq-answer">BingeX uses AI to analyze your preferences and suggest movies tailored to your tastes.</div>
+    </div>
+    <div class="faq-item">
+      <h3>Is BingeX free?</h3>
+      <div class="faq-answer">Yes! BingeX is completely free to use for all users.</div>
+    </div>
+    <div class="faq-item">
+      <h3>Can I filter movies by genre?</h3>
+      <div class="faq-answer">Absolutely! You can filter movies by genre, year, or mood to match your interests.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2024 BingeX. All rights reserved.</p>
+    <p> MADE BY NGWAKO R</p>
+  </footer>
+
+  <script>
+    // FAQ Dropdown Functionality
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+    });
+
+  
+   
+
+  </script>
+</body>
+</html>
